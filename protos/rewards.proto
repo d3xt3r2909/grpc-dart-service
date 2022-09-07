@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package rewards_s;
+
+message User {
+  string id = 1;
+  string username = 2;
+}
+
+message Reward {
+  string id = 1;
+  string title = 2;
+  string message = 3;
+  string thumbnail = 4;
+  string dynamicLink = 5;
+}
+
+message Connect {
+  User user = 1;
+}
+
+message Close {}
+
+service RewardsService {
+  rpc CreateStreamNotification(Connect) returns (stream Reward) {}
+  rpc BroadcastReward(Reward) returns (Close) {}
+}
